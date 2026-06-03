@@ -1,246 +1,643 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SCRewards</title>
-  <link rel="stylesheet" href="styles.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>RewardRadar | Deals, Bonuses & Free Rewards</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #ffffff;
+  background:
+    radial-gradient(circle at 75% 10%, rgba(140, 255, 24, 0.22), transparent 28%),
+    radial-gradient(circle at 15% 35%, rgba(150, 0, 255, 0.18), transparent 30%),
+    linear-gradient(180deg, #020407, #071018 52%, #030608);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 99;
+  min-height: 86px;
+  padding: 18px 6%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(2, 5, 8, 0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: -1px;
+}
+
+.logo span {
+  color: #8cff18;
+}
+
+.logo small {
+  display: block;
+  font-size: 9px;
+  letter-spacing: 1.8px;
+  color: #dce5ee;
+}
+
+nav {
+  display: flex;
+  gap: 22px;
+  font-size: 15px;
+}
+
+nav a:hover {
+  color: #8cff18;
+}
+
+main {
+  width: min(1180px, 92%);
+  margin: 0 auto;
+}
+
+.hero {
+  min-height: 560px;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: 45px;
+}
+
+.hero h1 {
+  font-size: clamp(48px, 6vw, 78px);
+  line-height: 0.95;
+  margin: 0;
+  letter-spacing: -3px;
+}
+
+.hero h1 span {
+  color: #8cff18;
+}
+
+.hero p {
+  max-width: 660px;
+  color: #d5dce5;
+  font-size: 19px;
+  line-height: 1.6;
+}
+
+.hero-card {
+  padding: 34px;
+  border-radius: 28px;
+  background:
+    radial-gradient(circle, rgba(140,255,24,0.28), transparent 58%),
+    linear-gradient(145deg, rgba(13,22,18,0.95), rgba(4,8,6,0.95));
+  border: 1px solid rgba(140,255,24,0.3);
+  box-shadow: 0 0 80px rgba(140,255,24,0.22);
+}
+
+.hero-card h2 {
+  font-size: 34px;
+  margin: 0 0 14px;
+}
+
+.hero-card p {
+  font-size: 16px;
+}
+
+.trust {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  margin-top: 30px;
+}
+
+.trust div {
+  border-left: 2px solid #8cff18;
+  padding-left: 14px;
+}
+
+.trust strong {
+  display: block;
+}
+
+.trust small {
+  color: #bac3ce;
+}
+
+.banner,
+.panel {
+  margin: 26px 0;
+  padding: 24px;
+  border-radius: 20px;
+  background: linear-gradient(145deg, rgba(12,18,25,0.96), rgba(5,9,13,0.96));
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 0 40px rgba(0,0,0,0.35);
+}
+
+.banner {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.banner strong {
+  color: #8cff18;
+}
+
+.banner p {
+  color: #d0d7df;
+  flex: 1;
+}
+
+.section-title {
+  margin-bottom: 24px;
+}
+
+.section-title h2 {
+  margin: 0;
+  font-size: 30px;
+}
+
+.section-title p {
+  color: #c1c9d3;
+  margin: 8px 0 0;
+  font-size: 16px;
+}
+
+.grid-two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+}
+
+.offer-card,
+.wide-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #0d151d, #060a0f);
+  border: 1px solid rgba(255,255,255,0.14);
+}
+
+.offer-card {
+  min-height: 300px;
+  padding: 16px;
+  display: grid;
+  grid-template-columns: 45% 1fr;
+  gap: 22px;
+  align-items: center;
+}
+
+.wide-card {
+  padding: 16px;
+  display: grid;
+  grid-template-columns: 38% 1fr 220px;
+  gap: 24px;
+  align-items: center;
+}
+
+.offer-card::after,
+.wide-card::after {
+  content: "";
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  bottom: 18px;
+  height: 2px;
+  background: #8cff18;
+  box-shadow: 0 0 20px #8cff18;
+}
+
+.purple-line::after {
+  background: #b400ff;
+  box-shadow: 0 0 20px #b400ff;
+}
+
+.blue-line::after {
+  background: #009dff;
+  box-shadow: 0 0 20px #009dff;
+}
+
+.offer-card img,
+.wide-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 14px;
+  display: block;
+  transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+.offer-card img:hover,
+.wide-card img:hover {
+  transform: scale(1.03);
+  filter: brightness(1.15);
+}
+
+.offer-card h3,
+.wide-card h3 {
+  font-size: 27px;
+  margin: 0 0 10px;
+}
+
+.offer-card p,
+.wide-card p,
+.simple-card p {
+  color: #d2d8e0;
+  line-height: 1.55;
+  font-size: 16px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 18px 0;
+}
+
+.tags span {
+  font-size: 13px;
+  font-weight: 800;
+  color: #8cff18;
+  border: 1px solid rgba(140,255,24,0.35);
+  background: #030608;
+  padding: 7px 10px;
+  border-radius: 8px;
+}
+
+.purple-tags span {
+  color: #d576ff;
+  border-color: rgba(213,118,255,0.4);
+}
+
+.blue-tags span {
+  color: #3dbdff;
+  border-color: rgba(61,189,255,0.4);
+}
+
+.btn {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  text-align: center;
+  min-width: 175px;
+  padding: 14px 24px;
+  border-radius: 14px;
+  font-weight: 900;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+.btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -90%;
+  width: 70%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.85), transparent);
+  transform: skewX(-25deg);
+  animation: shine 2.7s infinite;
+}
+
+@keyframes shine {
+  0% { left: -90%; }
+  55% { left: 130%; }
+  100% { left: 130%; }
+}
+
+.green {
+  background: linear-gradient(135deg, #8cff18, #276f00);
+  border-color: #8cff18;
+  box-shadow: 0 0 28px rgba(140,255,24,0.55);
+}
+
+.purple {
+  background: linear-gradient(135deg, #c000ff, #5400a8);
+  border-color: #c000ff;
+  box-shadow: 0 0 28px rgba(192,0,255,0.55);
+}
+
+.blue {
+  background: linear-gradient(135deg, #00a8ff, #004cff);
+  border-color: #00a8ff;
+  box-shadow: 0 0 28px rgba(0,168,255,0.55);
+}
+
+.simple-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.simple-card {
+  padding: 24px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #0d151d, #060a0f);
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+.footer {
+  margin-top: 50px;
+  padding: 34px 6%;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  background: #05090d;
+}
+
+.footer strong {
+  font-size: 28px;
+}
+
+.footer span {
+  color: #8cff18;
+}
+
+.footer small {
+  display: block;
+  margin-top: 4px;
+  font-size: 9px;
+  letter-spacing: 1.8px;
+}
+
+@media (max-width: 900px) {
+  .header,
+  .banner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  nav {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .hero,
+  .grid-two,
+  .wide-card,
+  .offer-card,
+  .simple-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .trust {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
 </head>
+
 <body>
 
 <header class="header">
   <a href="#home" class="logo">
-    <span class="gift">🎁</span>
-    <div>
-      <strong><span>SC</span>REWARDS</strong>
-      <small>REWARDS. BONUSES. REAL VALUE.</small>
-    </div>
+    <span>Reward</span>Radar
+    <small>DEALS. BONUSES. FREE REWARDS.</small>
   </a>
 
   <nav>
     <a href="#home">Home</a>
-    <a href="#bank-bonuses">Bank Bonuses</a>
-    <a href="#casinos">Casinos</a>
-    <a href="#cashback">Cashback Apps</a>
+    <a href="#featured">Featured Deals</a>
+    <a href="#casinos">Casino Bonuses</a>
+    <a href="#cashback">Cashback</a>
     <a href="#gaming">Gaming</a>
     <a href="#tech">Tech</a>
-    <a href="#daily-deal">Daily Deal</a>
-    <a href="#blog">Blog</a>
+    <a href="#free">Free Rewards</a>
   </nav>
-
-  <a class="discord" href="YOUR_DISCORD_LINK" target="_blank">Join Discord</a>
 </header>
 
 <main id="home">
 
-  <section class="hero">
-    <div class="hero-text">
-      <h1>The Best <span>Rewards.</span><br>The Best <span>Bonuses.</span></h1>
-      <p>
-        Hand-picked offers that actually pay. From bank bonuses to no deposit casino rewards,
-        cashback apps, gaming perks, and the best tech deals.
-      </p>
+<section class="hero">
+  <div>
+    <h1>One Place For <span>Deals,</span><br><span>Bonuses</span> & Freebies.</h1>
+    <p>
+      Find useful links for casino bonuses, cashback apps, gaming rewards, tech deals,
+      free offers, and money-saving tools — all organized in one simple place.
+    </p>
 
-      <div class="trust-row">
-        <div>✅ <strong>Verified Offers</strong><small>We test every offer</small></div>
-        <div>💵 <strong>Highest Payouts</strong><small>Get the most value</small></div>
-        <div>🔒 <strong>No Hidden Fees</strong><small>Free to join and use</small></div>
-      </div>
-    </div>
-
-    <div class="gift-scene">
-      <div class="coin coin-one">$</div>
-      <div class="coin coin-two">¢</div>
-      <div class="coin coin-three">$</div>
-
-      <div class="gift-box">
-        <div class="gift-lid"></div>
-        <div class="gift-ribbon-v"></div>
-        <div class="gift-ribbon-h"></div>
-        <div class="gift-dollar">$</div>
-      </div>
-    </div>
-  </section>
-
-  <section class="announcement">
-    <span>🔥 <strong>New offers added weekly</strong></span>
-    <p>Join our Discord for exclusive drops and limited-time bonuses!</p>
-    <a href="YOUR_DISCORD_LINK" target="_blank">Join Discord →</a>
-  </section>
-
-  <section id="daily-deal" class="panel">
-    <div class="section-head">
+    <div class="trust">
       <div>
-        <h2>⚡ Daily Deal</h2>
-        <p>Today’s featured reward, cashback, or bonus offer.</p>
+        <strong>Curated Links</strong>
+        <small>Only offers worth checking out.</small>
+      </div>
+      <div>
+        <strong>Real Value</strong>
+        <small>Bonuses, rewards, and savings.</small>
+      </div>
+      <div>
+        <strong>Easy Access</strong>
+        <small>Click, sign up, and claim.</small>
       </div>
     </div>
+  </div>
 
-    <article class="wide-offer neon-green">
-      <div class="deal-art daily-art">
-        <span>DAILY DEAL</span>
-      </div>
+  <div class="hero-card">
+    <h2>🔥 Featured Deals</h2>
+    <p>
+      Start with the top offers below. These are the main deals currently highlighted
+      on RewardRadar.
+    </p>
+    <a href="#featured" class="btn green">VIEW DEALS →</a>
+  </div>
+</section>
 
+<section class="banner">
+  <span>🔥 <strong>Featured offers updated often</strong></span>
+  <p>Casino bonuses, cashback apps, gaming rewards, tech tools, and free deals in one spot.</p>
+</section>
+
+<section id="featured" class="panel">
+  <div class="section-title">
+    <h2>🔥 Featured Deals</h2>
+    <p>The best current links to start with.</p>
+  </div>
+
+  <div class="grid-two">
+    <article class="offer-card">
+      <a href="https://stake.us/?c=aaLEj1pQ" target="_blank">
+        <img src="images/stake.jpg" alt="Stake.us">
+      </a>
       <div>
-        <h3>Featured Daily Deal</h3>
-        <p>Add your Rakuten-supported daily deal here. The Rakuten Automate code can automatically monetize eligible merchant links.</p>
+        <h3>Stake.us</h3>
+        <p>
+          Stake.us is a popular social casino where users can claim daily rewards,
+          collect free coins, and explore casino-style games and promotions.
+        </p>
         <div class="tags">
-          <span>Daily Deal</span>
-          <span>Limited Time</span>
-          <span>Rakuten</span>
+          <span>Daily Rewards</span>
+          <span>Social Casino</span>
+          <span>Free Coins</span>
         </div>
+        <a class="btn green" href="https://stake.us/?c=aaLEj1pQ" target="_blank">PLAY NOW →</a>
       </div>
-
-      <a href="YOUR_DAILY_DEAL_LINK" target="_blank" class="btn green">GET DEAL →</a>
     </article>
-  </section>
 
-  <section id="casinos" class="panel">
-    <div class="section-head">
+    <article class="offer-card purple-line">
+      <a href="https://csgogem.com/r/xzarrx" target="_blank">
+        <img src="images/csgogem.png" alt="CSGOGem">
+      </a>
       <div>
-        <h2>🎰 No Bonus Deposit Casino Rewards</h2>
-        <p>Play without spending a dime. Keep what you win.</p>
-      </div>
-    </div>
-
-    <div class="grid-two">
-      <article class="offer-card neon-green">
-        <img src="images/stake.jpg" alt="Stake.us bonus" />
-        <div class="card-content">
-          <h3>Stake.us</h3>
-          <p>Get 10,000 Gold Coins & 1 Stake Cash FREE daily.</p>
-          <div class="tags">
-            <span>No Deposit</span>
-            <span>Daily Bonus</span>
-            <span>Casino</span>
-          </div>
-          <a href="YOUR_STAKE_LINK" target="_blank" class="btn green">PLAY NOW →</a>
+        <h3>CSGOGem</h3>
+        <p>
+          CSGOGem lets users claim free gems and use them on cases, upgrades,
+          battles, and CS2-style rewards.
+        </p>
+        <div class="tags purple-tags">
+          <span>CS2</span>
+          <span>Free Gems</span>
+          <span>Gaming</span>
         </div>
-      </article>
-
-      <article class="offer-card neon-purple">
-        <img src="images/csgogem.png" alt="CSGOGem" />
-        <div class="card-content">
-          <h3>CSGOGem</h3>
-          <p>Claim free gems daily and use them on cases, battles, and upgrades. No deposit required.</p>
-          <div class="tags purple-tags">
-            <span>No Deposit</span>
-            <span>Free Cases</span>
-            <span>CS2</span>
-          </div>
-          <a href="YOUR_CSGOGEM_LINK" target="_blank" class="btn purple">REDEEM →</a>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <section id="cashback" class="panel">
-    <div class="section-head">
-      <div>
-        <h2>💙 Cashback Apps</h2>
-        <p>Earn cashback on everyday purchases.</p>
+        <a class="btn purple" href="https://csgogem.com/r/xzarrx" target="_blank">REDEEM →</a>
       </div>
-    </div>
-
-    <article class="wide-offer neon-blue">
-      <img src="images/upside.jpg" alt="Upside cashback" />
-
-      <div>
-        <h3>Upside</h3>
-        <p>Save money on gas, groceries, and restaurants. Get cashback when you shop and pay.</p>
-        <div class="tags blue-tags">
-          <span>Cashback</span>
-          <span>Gas Savings</span>
-          <span>Groceries</span>
-        </div>
-      </div>
-
-      <a href="YOUR_UPSIDE_LINK" target="_blank" class="btn blue">GET CASHBACK →</a>
     </article>
-  </section>
+  </div>
+</section>
 
-  <section id="gaming" class="panel">
-    <h2>🎮 Gaming</h2>
-    <p>Add your gaming offers here instead of Eneba or NordVPN.</p>
-  </section>
+<section id="cashback" class="panel">
+  <div class="section-title">
+    <h2>💰 Cashback & Savings</h2>
+    <p>Apps and tools that help you earn money back on everyday spending.</p>
+  </div>
 
-  <section id="tech" class="panel">
-    <h2>💻 Tech</h2>
-    <p>Add VPNs, software, tools, subscriptions, or app deals here.</p>
-  </section>
+  <article class="wide-card blue-line">
+    <a href="https://upside.app.link/ISAIAH23539" target="_blank">
+      <img src="images/upside.jpg" alt="Upside app">
+    </a>
 
-  <section id="bank-bonuses" class="panel">
-    <h2>🏦 Bank Bonuses</h2>
-    <p>Add bank signup bonuses and finance rewards here.</p>
-  </section>
+    <div>
+      <h3>Upside</h3>
+      <p>
+        Upside helps users earn cashback on gas, groceries, restaurants, and everyday
+        purchases. It is an easy way to save money on spending you already do.
+      </p>
+      <div class="tags blue-tags">
+        <span>Cashback</span>
+        <span>Gas Savings</span>
+        <span>Groceries</span>
+      </div>
+    </div>
 
-  <section id="blog" class="panel">
-    <h2>📝 Blog</h2>
-    <p>Add guides, reviews, rankings, or bonus updates here.</p>
-  </section>
+    <a class="btn blue" href="https://upside.app.link/ISAIAH23539" target="_blank">GET CASHBACK →</a>
+  </article>
+</section>
+
+<section id="casinos" class="panel">
+  <div class="section-title">
+    <h2>🎰 Casino Bonuses</h2>
+    <p>Social casino links, daily rewards, free coins, free gems, and bonus opportunities.</p>
+  </div>
+
+  <div class="simple-grid">
+    <div class="simple-card">
+      <h3>Daily Casino Rewards</h3>
+      <p>Great for social casinos that offer daily coin claims, sweeps rewards, and free play promos.</p>
+    </div>
+
+    <div class="simple-card">
+      <h3>Free Gems & Cases</h3>
+      <p>Useful for CS2-style sites, case rewards, upgrade games, and gaming bonus platforms.</p>
+    </div>
+
+    <div class="simple-card">
+      <h3>Bonus Links</h3>
+      <p>Add any casino, gaming, or rewards link here when you get more affiliate offers.</p>
+    </div>
+  </div>
+</section>
+
+<section id="gaming" class="panel">
+  <div class="section-title">
+    <h2>🎮 Gaming Rewards</h2>
+    <p>Game deals, free rewards, gift cards, skins, cases, memberships, and gaming discounts.</p>
+  </div>
+
+  <div class="simple-grid">
+    <div class="simple-card">
+      <h3>G2A</h3>
+      <p>Good option for game keys and gaming marketplace deals. Look for their affiliate program through Awin.</p>
+    </div>
+
+    <div class="simple-card">
+      <h3>Fanatical</h3>
+      <p>Good for PC game bundles, Steam keys, and discounted gaming offers.</p>
+    </div>
+
+    <div class="simple-card">
+      <h3>GameFly</h3>
+      <p>Good for gaming subscriptions, rentals, and console game offers.</p>
+    </div>
+  </div>
+</section>
+
+<section id="tech" class="panel">
+  <div class="section-title">
+    <h2>💻 Tech Deals</h2>
+    <p>Software, creator tools, AI apps, VPNs, security apps, and useful digital products.</p>
+  </div>
+
+  <div class="simple-grid">
+    <div class="simple-card">
+      <h3>Surfshark</h3>
+      <p>VPN and online privacy tools. Good tech affiliate category for digital product offers.</p>
+    </div>
+
+    <div class="simple-card">
+      <h3>Adobe</h3>
+      <p>Creative software and digital tools for creators, students, editors, and businesses.</p>
+    </div>
+
+    <div class="simple-card">
+      <h3>Hostinger</h3>
+      <p>Website hosting, domains, and online tools. Great fit if your audience builds websites.</p>
+    </div>
+  </div>
+</section>
+
+<section id="free" class="panel">
+  <div class="section-title">
+    <h2>🎁 Free Rewards</h2>
+    <p>Free apps, reward programs, signup bonuses, referral links, and useful freebies.</p>
+  </div>
+
+  <div class="simple-grid">
+    <div class="simple-card">
+      <h3>Receipt Apps</h3>
+      <p>Add Fetch, Ibotta, Receipt Hog, or other receipt reward apps here.</p>
+    </div>
+
+    <div class="simple-card">
+      <h3>Free Signup Offers</h3>
+      <p>Add apps that reward people for signing up, trying services, or completing simple tasks.</p>
+    </div>
+
+    <div class="simple-card">
+      <h3>Daily Deals</h3>
+      <p>Use this area for rotating offers, Rakuten links, limited-time rewards, and seasonal deals.</p>
+    </div>
+  </div>
+</section>
 
 </main>
 
-<footer>
-  <strong><span>SC</span>REWARDS</strong>
-  <p>© 2025 SCRewards. All rights reserved.</p>
+<footer class="footer">
+  <strong><span>Reward</span>Radar</strong>
+  <small>DEALS. BONUSES. FREE REWARDS.</small>
 </footer>
-
-<script>
-  var _rakuten_automate = {
-    u1: "",
-    snippetURL: "https://automate-frontend.linksynergy.com/minified_logic.js",
-    automateURL: "https://automate.linksynergy.com",
-    widgetKey: "zXZFB7MnyD4pjdNa8alGrsck1trxjeQC",
-    aelJS: null,
-    useDefaultAEL: false,
-    loaded: false,
-    events: []
-  };
-
-  var ael = window.addEventListener;
-
-  window.addEventListener = function(a, b, c, d) {
-    if ("click" !== a && _rakuten_automate.useDefaultAEL) {
-      ael(a, b, c);
-    } else {
-      _rakuten_automate.events.push({
-        type: a,
-        handler: b,
-        capture: c,
-        rakuten: d
-      });
-    }
-  };
-
-  _rakuten_automate.links = {};
-
-  var httpRequest = new XMLHttpRequest();
-  httpRequest.open("GET", _rakuten_automate.snippetURL, true);
-  httpRequest.timeout = 5000;
-
-  httpRequest.ontimeout = function() {
-    if (!_rakuten_automate.loaded) {
-      for (var i = 0; i < _rakuten_automate.events.length; i++) {
-        var eventItem = _rakuten_automate.events[i];
-        ael(eventItem.type, eventItem.handler, eventItem.capture);
-      }
-      _rakuten_automate.useDefaultAEL = true;
-    }
-  };
-
-  httpRequest.onreadystatechange = function() {
-    if (
-      httpRequest.readyState === XMLHttpRequest.DONE &&
-      httpRequest.status === 200
-    ) {
-      eval(httpRequest.responseText);
-      _rakuten_automate.run(ael);
-    }
-  };
-
-  httpRequest.send(null);
-</script>
 
 </body>
 </html>
