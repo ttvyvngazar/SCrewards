@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>RewardRadar | Deals, Bonuses & Free Rewards</title>
+<title>SCRewards</title>
 
 <style>
 * {
@@ -17,11 +17,23 @@ html {
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
-  color: #ffffff;
+  color: #fff;
   background:
-    radial-gradient(circle at 75% 10%, rgba(140, 255, 24, 0.22), transparent 28%),
-    radial-gradient(circle at 15% 35%, rgba(150, 0, 255, 0.18), transparent 30%),
-    linear-gradient(180deg, #020407, #071018 52%, #030608);
+    radial-gradient(circle at 78% 8%, rgba(140,255,24,.22), transparent 28%),
+    radial-gradient(circle at 16% 28%, rgba(168,0,255,.18), transparent 32%),
+    linear-gradient(180deg, #020407, #071018 48%, #030608);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+  background-size: 46px 46px;
+  opacity: .55;
 }
 
 a {
@@ -30,22 +42,22 @@ a {
 }
 
 .header {
+  min-height: 96px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(2,5,8,.76);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(255,255,255,.08);
   position: sticky;
   top: 0;
-  z-index: 99;
-  min-height: 86px;
-  padding: 18px 6%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: rgba(2, 5, 8, 0.92);
-  backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(255,255,255,0.1);
+  z-index: 50;
 }
 
 .logo {
-  font-size: 28px;
-  font-weight: 900;
+  text-align: center;
+  font-size: 36px;
+  font-weight: 950;
   letter-spacing: -1px;
 }
 
@@ -55,69 +67,44 @@ a {
 
 .logo small {
   display: block;
-  font-size: 9px;
-  letter-spacing: 1.8px;
-  color: #dce5ee;
-}
-
-nav {
-  display: flex;
-  gap: 22px;
-  font-size: 15px;
-}
-
-nav a:hover {
-  color: #8cff18;
+  margin-top: 4px;
+  font-size: 10px;
+  letter-spacing: 2.5px;
+  color: #dce8ef;
 }
 
 main {
-  width: min(1180px, 92%);
+  width: min(1220px, 92%);
   margin: 0 auto;
+  position: relative;
+  z-index: 2;
 }
 
 .hero {
-  min-height: 560px;
+  min-height: 620px;
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
+  grid-template-columns: 1.1fr .9fr;
   align-items: center;
-  gap: 45px;
+  gap: 44px;
 }
 
 .hero h1 {
-  font-size: clamp(48px, 6vw, 78px);
-  line-height: 0.95;
   margin: 0;
+  font-size: clamp(50px, 6vw, 82px);
+  line-height: .94;
   letter-spacing: -3px;
 }
 
 .hero h1 span {
   color: #8cff18;
+  text-shadow: 0 0 28px rgba(140,255,24,.45);
 }
 
 .hero p {
-  max-width: 660px;
-  color: #d5dce5;
+  max-width: 680px;
+  color: #d7dee7;
   font-size: 19px;
   line-height: 1.6;
-}
-
-.hero-card {
-  padding: 34px;
-  border-radius: 28px;
-  background:
-    radial-gradient(circle, rgba(140,255,24,0.28), transparent 58%),
-    linear-gradient(145deg, rgba(13,22,18,0.95), rgba(4,8,6,0.95));
-  border: 1px solid rgba(140,255,24,0.3);
-  box-shadow: 0 0 80px rgba(140,255,24,0.22);
-}
-
-.hero-card h2 {
-  font-size: 34px;
-  margin: 0 0 14px;
-}
-
-.hero-card p {
-  font-size: 16px;
 }
 
 .trust {
@@ -128,138 +115,246 @@ main {
 }
 
 .trust div {
-  border-left: 2px solid #8cff18;
-  padding-left: 14px;
+  padding: 16px;
+  border-radius: 16px;
+  background: rgba(255,255,255,.045);
+  border: 1px solid rgba(255,255,255,.09);
 }
 
 .trust strong {
   display: block;
+  margin-bottom: 4px;
 }
 
 .trust small {
   color: #bac3ce;
 }
 
+.hero-box {
+  min-height: 410px;
+  border-radius: 32px;
+  position: relative;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle, rgba(140,255,24,.32), transparent 60%),
+    linear-gradient(145deg, rgba(13,22,18,.95), rgba(4,8,6,.95));
+  border: 1px solid rgba(140,255,24,.35);
+  box-shadow: 0 0 90px rgba(140,255,24,.22);
+  overflow: hidden;
+}
+
+.gift {
+  width: 235px;
+  height: 225px;
+  border-radius: 22px;
+  background: linear-gradient(145deg, #111b15, #030503);
+  border: 1px solid rgba(140,255,24,.55);
+  box-shadow: inset 0 0 30px rgba(140,255,24,.16), 0 0 55px rgba(140,255,24,.35);
+  position: relative;
+}
+
+.gift::before {
+  content: "$";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 96px;
+  color: #baff38;
+  text-shadow: 0 0 24px #8cff18;
+  z-index: 3;
+}
+
+.gift::after {
+  content: "";
+  position: absolute;
+  left: 94px;
+  top: -38px;
+  width: 48px;
+  height: 270px;
+  background: linear-gradient(#baff38, #398a00);
+  box-shadow: 0 0 28px #8cff18;
+  z-index: 2;
+}
+
+.gift .ribbon {
+  position: absolute;
+  left: 0;
+  top: 88px;
+  width: 100%;
+  height: 38px;
+  background: linear-gradient(90deg, #398a00, #baff38, #398a00);
+  z-index: 2;
+}
+
+.coin {
+  position: absolute;
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: #8cff18;
+  font-size: 28px;
+  font-weight: 900;
+  border: 3px solid rgba(140,255,24,.45);
+  background: radial-gradient(circle, #30342d, #0b0d0b);
+  box-shadow: 0 0 30px rgba(140,255,24,.25);
+}
+
+.c1 { left: 45px; top: 160px; }
+.c2 { right: 44px; top: 92px; }
+.c3 { right: 70px; bottom: 72px; }
+
 .banner,
-.panel {
-  margin: 26px 0;
+.section {
+  margin: 28px 0;
   padding: 24px;
-  border-radius: 20px;
-  background: linear-gradient(145deg, rgba(12,18,25,0.96), rgba(5,9,13,0.96));
-  border: 1px solid rgba(255,255,255,0.12);
-  box-shadow: 0 0 40px rgba(0,0,0,0.35);
+  border-radius: 22px;
+  background: linear-gradient(145deg, rgba(12,18,25,.96), rgba(5,9,13,.96));
+  border: 1px solid rgba(255,255,255,.12);
+  box-shadow: 0 0 42px rgba(0,0,0,.36);
 }
 
 .banner {
-  display: flex;
-  align-items: center;
-  gap: 18px;
+  text-align: center;
+  font-size: 18px;
+  color: #d8e0e9;
 }
 
 .banner strong {
   color: #8cff18;
 }
 
-.banner p {
-  color: #d0d7df;
-  flex: 1;
-}
-
-.section-title {
+.section-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
   margin-bottom: 24px;
 }
 
-.section-title h2 {
+.section-top h2 {
   margin: 0;
   font-size: 30px;
 }
 
-.section-title p {
-  color: #c1c9d3;
+.section-top p {
   margin: 8px 0 0;
-  font-size: 16px;
+  color: #c3ccd7;
 }
 
-.grid-two {
+.scroll-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.arrow {
+  width: 46px;
+  height: 46px;
+  border-radius: 999px;
+  border: 1px solid rgba(140,255,24,.35);
+  color: #8cff18;
+  background: rgba(255,255,255,.05);
+  cursor: pointer;
+  font-size: 22px;
+}
+
+.carousel {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(390px, 1fr);
   gap: 22px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 10px;
 }
 
-.offer-card,
-.wide-card {
+.carousel::-webkit-scrollbar {
+  height: 8px;
+}
+
+.carousel::-webkit-scrollbar-thumb {
+  background: rgba(140,255,24,.45);
+  border-radius: 999px;
+}
+
+.card {
+  scroll-snap-align: start;
   position: relative;
   overflow: hidden;
-  border-radius: 18px;
+  min-height: 430px;
+  border-radius: 20px;
   background: linear-gradient(135deg, #0d151d, #060a0f);
-  border: 1px solid rgba(255,255,255,0.14);
+  border: 1px solid rgba(255,255,255,.14);
+  box-shadow: 0 0 32px rgba(0,0,0,.35);
+  transition: transform .25s ease, border-color .25s ease;
 }
 
-.offer-card {
-  min-height: 300px;
-  padding: 16px;
-  display: grid;
-  grid-template-columns: 45% 1fr;
-  gap: 22px;
-  align-items: center;
+.card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(255,255,255,.25);
 }
 
-.wide-card {
-  padding: 16px;
-  display: grid;
-  grid-template-columns: 38% 1fr 220px;
-  gap: 24px;
-  align-items: center;
-}
-
-.offer-card::after,
-.wide-card::after {
+.card::after {
   content: "";
   position: absolute;
   left: 22px;
   right: 22px;
   bottom: 18px;
   height: 2px;
-  background: #8cff18;
-  box-shadow: 0 0 20px #8cff18;
+  background: var(--glow);
+  box-shadow: 0 0 22px var(--glow);
 }
 
-.purple-line::after {
-  background: #b400ff;
-  box-shadow: 0 0 20px #b400ff;
-}
-
-.blue-line::after {
-  background: #009dff;
-  box-shadow: 0 0 20px #009dff;
-}
-
-.offer-card img,
-.wide-card img {
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
-  border-radius: 14px;
+.card-image {
+  position: relative;
+  height: 185px;
   display: block;
-  transition: transform 0.25s ease, filter 0.25s ease;
+  overflow: hidden;
 }
 
-.offer-card img:hover,
-.wide-card img:hover {
-  transform: scale(1.03);
-  filter: brightness(1.15);
+.card-image::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at center, color-mix(in srgb, var(--glow) 32%, transparent), transparent 60%),
+    linear-gradient(180deg, rgba(0,0,0,.1), rgba(0,0,0,.75));
+  z-index: 2;
 }
 
-.offer-card h3,
-.wide-card h3 {
-  font-size: 27px;
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(.9);
+  transition: transform .25s ease, filter .25s ease;
+}
+
+.card-image:hover img {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+.logo-bg {
+  object-fit: contain !important;
+  padding: 44px;
+  background: radial-gradient(circle, rgba(255,255,255,.08), rgba(0,0,0,.65));
+}
+
+.card-content {
+  padding: 24px;
+}
+
+.card h3 {
   margin: 0 0 10px;
+  font-size: 28px;
 }
 
-.offer-card p,
-.wide-card p,
-.simple-card p {
-  color: #d2d8e0;
+.card p {
+  color: #d1d8e0;
   line-height: 1.55;
   font-size: 16px;
 }
@@ -274,33 +369,25 @@ main {
 .tags span {
   font-size: 13px;
   font-weight: 800;
-  color: #8cff18;
-  border: 1px solid rgba(140,255,24,0.35);
+  color: var(--glow);
+  border: 1px solid color-mix(in srgb, var(--glow) 40%, transparent);
   background: #030608;
   padding: 7px 10px;
   border-radius: 8px;
-}
-
-.purple-tags span {
-  color: #d576ff;
-  border-color: rgba(213,118,255,0.4);
-}
-
-.blue-tags span {
-  color: #3dbdff;
-  border-color: rgba(61,189,255,0.4);
 }
 
 .btn {
   position: relative;
   overflow: hidden;
   display: inline-block;
-  text-align: center;
-  min-width: 175px;
-  padding: 14px 24px;
+  min-width: 170px;
+  padding: 14px 22px;
   border-radius: 14px;
+  text-align: center;
   font-weight: 900;
-  border: 1px solid rgba(255,255,255,0.2);
+  background: linear-gradient(135deg, var(--glow), var(--dark));
+  border: 1px solid var(--glow);
+  box-shadow: 0 0 28px color-mix(in srgb, var(--glow) 55%, transparent);
 }
 
 .btn::before {
@@ -310,7 +397,7 @@ main {
   left: -90%;
   width: 70%;
   height: 100%;
-  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.85), transparent);
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,.88), transparent);
   transform: skewX(-25deg);
   animation: shine 2.7s infinite;
 }
@@ -321,46 +408,22 @@ main {
   100% { left: 130%; }
 }
 
-.green {
-  background: linear-gradient(135deg, #8cff18, #276f00);
-  border-color: #8cff18;
-  box-shadow: 0 0 28px rgba(140,255,24,0.55);
-}
-
-.purple {
-  background: linear-gradient(135deg, #c000ff, #5400a8);
-  border-color: #c000ff;
-  box-shadow: 0 0 28px rgba(192,0,255,0.55);
-}
-
-.blue {
-  background: linear-gradient(135deg, #00a8ff, #004cff);
-  border-color: #00a8ff;
-  box-shadow: 0 0 28px rgba(0,168,255,0.55);
-}
-
-.simple-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 22px;
-}
-
-.simple-card {
-  padding: 24px;
-  border-radius: 18px;
-  background: linear-gradient(135deg, #0d151d, #060a0f);
-  border: 1px solid rgba(255,255,255,0.12);
-}
+.green { --glow: #8cff18; --dark: #276f00; }
+.purple { --glow: #c000ff; --dark: #5400a8; }
+.blue { --glow: #00a8ff; --dark: #004cff; }
+.orange { --glow: #ff9f1c; --dark: #9a4f00; }
+.pink { --glow: #ff4fd8; --dark: #7d005f; }
 
 .footer {
-  margin-top: 50px;
+  margin-top: 54px;
   padding: 34px 6%;
-  border-top: 1px solid rgba(255,255,255,0.1);
+  border-top: 1px solid rgba(255,255,255,.1);
   background: #05090d;
+  text-align: center;
 }
 
 .footer strong {
-  font-size: 28px;
+  font-size: 30px;
 }
 
 .footer span {
@@ -369,33 +432,28 @@ main {
 
 .footer small {
   display: block;
-  margin-top: 4px;
-  font-size: 9px;
-  letter-spacing: 1.8px;
+  margin-top: 5px;
+  font-size: 10px;
+  letter-spacing: 2px;
 }
 
 @media (max-width: 900px) {
-  .header,
-  .banner {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  nav {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .hero,
-  .grid-two,
-  .wide-card,
-  .offer-card,
-  .simple-grid {
+  .hero {
     grid-template-columns: 1fr;
+    padding: 46px 0;
   }
 
   .trust {
     grid-template-columns: 1fr;
+  }
+
+  .section-top {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .carousel {
+    grid-auto-columns: 88%;
   }
 }
 </style>
@@ -404,240 +462,262 @@ main {
 <body>
 
 <header class="header">
-  <a href="#home" class="logo">
-    <span>Reward</span>Radar
+  <a href="#" class="logo">
+    <span>SC</span>Rewards
     <small>DEALS. BONUSES. FREE REWARDS.</small>
   </a>
-
-  <nav>
-    <a href="#home">Home</a>
-    <a href="#featured">Featured Deals</a>
-    <a href="#casinos">Casino Bonuses</a>
-    <a href="#cashback">Cashback</a>
-    <a href="#gaming">Gaming</a>
-    <a href="#tech">Tech</a>
-    <a href="#free">Free Rewards</a>
-  </nav>
 </header>
 
-<main id="home">
+<main>
 
 <section class="hero">
   <div>
-    <h1>One Place For <span>Deals,</span><br><span>Bonuses</span> & Freebies.</h1>
+    <h1>The Best <span>Rewards.</span><br>The Best <span>Bonuses.</span></h1>
     <p>
-      Find useful links for casino bonuses, cashback apps, gaming rewards, tech deals,
-      free offers, and money-saving tools — all organized in one simple place.
+      Hand-picked links for free bonuses, cashback apps, gaming rewards, tech perks,
+      and useful offers people can actually claim.
     </p>
 
     <div class="trust">
-      <div>
-        <strong>Curated Links</strong>
-        <small>Only offers worth checking out.</small>
-      </div>
-      <div>
-        <strong>Real Value</strong>
-        <small>Bonuses, rewards, and savings.</small>
-      </div>
-      <div>
-        <strong>Easy Access</strong>
-        <small>Click, sign up, and claim.</small>
-      </div>
+      <div><strong>✓ Verified Offers</strong><small>Simple links worth checking out.</small></div>
+      <div><strong>$ Real Value</strong><small>Bonuses, cashback, and rewards.</small></div>
+      <div><strong>🔒 Easy Access</strong><small>Click, sign up, and claim.</small></div>
     </div>
   </div>
 
-  <div class="hero-card">
-    <h2>🔥 Featured Deals</h2>
-    <p>
-      Start with the top offers below. These are the main deals currently highlighted
-      on RewardRadar.
-    </p>
-    <a href="#featured" class="btn green">VIEW DEALS →</a>
+  <div class="hero-box">
+    <div class="coin c1">$</div>
+    <div class="coin c2">¢</div>
+    <div class="coin c3">$</div>
+    <div class="gift"><div class="ribbon"></div></div>
   </div>
 </section>
 
 <section class="banner">
-  <span>🔥 <strong>Featured offers updated often</strong></span>
-  <p>Casino bonuses, cashback apps, gaming rewards, tech tools, and free deals in one spot.</p>
+  🔥 <strong>Featured deals updated often.</strong> Free bonuses, cashback apps, gaming rewards, and useful money-saving links.
 </section>
 
-<section id="featured" class="panel">
-  <div class="section-title">
-    <h2>🔥 Featured Deals</h2>
-    <p>The best current links to start with.</p>
+<section class="section">
+  <div class="section-top">
+    <div>
+      <h2>🔥 Featured Deals</h2>
+      <p>The top offers to start with.</p>
+    </div>
+    <div class="scroll-buttons">
+      <button class="arrow" onclick="scrollDeals('featured', -1)">‹</button>
+      <button class="arrow" onclick="scrollDeals('featured', 1)">›</button>
+    </div>
   </div>
 
-  <div class="grid-two">
-    <article class="offer-card">
-      <a href="https://stake.us/?c=aaLEj1pQ" target="_blank">
+  <div class="carousel" id="featured">
+    <article class="card green">
+      <a class="card-image" href="https://stake.us/?c=aaLEj1pQ" target="_blank">
         <img src="images/stake.jpg" alt="Stake.us">
       </a>
-      <div>
+      <div class="card-content">
         <h3>Stake.us</h3>
-        <p>
-          Stake.us is a popular social casino where users can claim daily rewards,
-          collect free coins, and explore casino-style games and promotions.
-        </p>
-        <div class="tags">
-          <span>Daily Rewards</span>
-          <span>Social Casino</span>
-          <span>Free Coins</span>
-        </div>
-        <a class="btn green" href="https://stake.us/?c=aaLEj1pQ" target="_blank">PLAY NOW →</a>
+        <p>Verify your account and receive free Gold Coins and Stake Cash credited to your account with no deposit required.</p>
+        <div class="tags"><span>Free Bonus</span><span>Social Casino</span><span>No Deposit</span></div>
+        <a class="btn" href="https://stake.us/?c=aaLEj1pQ" target="_blank">PLAY NOW →</a>
       </div>
     </article>
 
-    <article class="offer-card purple-line">
-      <a href="https://csgogem.com/r/xzarrx" target="_blank">
-        <img src="images/csgogem.webp" alt="CSGOGem">
+    <article class="card purple">
+      <a class="card-image" href="https://csgogem.com/r/xzarrx" target="_blank">
+        <img src="images/csgogem.png" alt="CSGOGem">
       </a>
-      <div>
+      <div class="card-content">
         <h3>CSGOGem</h3>
-        <p>
-          CSGOGem lets users claim free gems and use them on cases, upgrades,
-          battles, and CS2-style rewards.
-        </p>
-        <div class="tags purple-tags">
-          <span>CS2</span>
-          <span>Free Gems</span>
-          <span>Gaming</span>
-        </div>
-        <a class="btn purple" href="https://csgogem.com/r/xzarrx" target="_blank">REDEEM →</a>
+        <p>Claim free gems and use them on cases, upgrades, battles, and CS2-style rewards.</p>
+        <div class="tags"><span>Free Gems</span><span>Cases</span><span>Gaming</span></div>
+        <a class="btn" href="https://csgogem.com/r/xzarrx" target="_blank">REDEEM →</a>
+      </div>
+    </article>
+
+    <article class="card blue">
+      <a class="card-image" href="https://upside.app.link/ISAIAH23539" target="_blank">
+        <img src="images/upside.jpg" alt="Upside">
+      </a>
+      <div class="card-content">
+        <h3>Upside</h3>
+        <p>Earn cashback on gas, groceries, and restaurants. New users can get extra cashback on eligible first purchases.</p>
+        <div class="tags"><span>Gas Cashback</span><span>Groceries</span><span>Dining</span></div>
+        <a class="btn" href="https://upside.app.link/ISAIAH23539" target="_blank">GET CASHBACK →</a>
       </div>
     </article>
   </div>
 </section>
 
-<section id="cashback" class="panel">
-  <div class="section-title">
-    <h2>💰 Cashback & Savings</h2>
-    <p>Apps and tools that help you earn money back on everyday spending.</p>
-  </div>
-
-  <article class="wide-card blue-line">
-    <a href="https://upside.app.link/ISAIAH23539" target="_blank">
-      <img src="images/upside.jpg" alt="Upside app">
-    </a>
-
+<section class="section">
+  <div class="section-top">
     <div>
-      <h3>Upside</h3>
-      <p>
-        Upside helps users earn cashback on gas, groceries, restaurants, and everyday
-        purchases. It is an easy way to save money on spending you already do.
-      </p>
-      <div class="tags blue-tags">
-        <span>Cashback</span>
-        <span>Gas Savings</span>
-        <span>Groceries</span>
+      <h2>🎁 Free Bonuses</h2>
+      <p>Casino, case, and reward links with free signup value.</p>
+    </div>
+    <div class="scroll-buttons">
+      <button class="arrow" onclick="scrollDeals('bonuses', -1)">‹</button>
+      <button class="arrow" onclick="scrollDeals('bonuses', 1)">›</button>
+    </div>
+  </div>
+
+  <div class="carousel" id="bonuses">
+    <article class="card green">
+      <a class="card-image" href="https://stake.us/?c=aaLEj1pQ" target="_blank">
+        <img src="images/stake.jpg" alt="Stake.us">
+      </a>
+      <div class="card-content">
+        <h3>Stake.us</h3>
+        <p>Verify your account to unlock free Gold Coins and Stake Cash with no deposit required.</p>
+        <div class="tags"><span>Stake Cash</span><span>Gold Coins</span><span>No Deposit</span></div>
+        <a class="btn" href="https://stake.us/?c=aaLEj1pQ" target="_blank">CLAIM BONUS →</a>
       </div>
-    </div>
+    </article>
 
-    <a class="btn blue" href="https://upside.app.link/ISAIAH23539" target="_blank">GET CASHBACK →</a>
-  </article>
-</section>
+    <article class="card purple">
+      <a class="card-image" href="https://csgogem.com/r/xzarrx" target="_blank">
+        <img src="images/csgogem.png" alt="CSGOGem">
+      </a>
+      <div class="card-content">
+        <h3>CSGOGem</h3>
+        <p>Get free gems and use them toward cases, upgrades, and gaming rewards.</p>
+        <div class="tags"><span>Free Gems</span><span>CS2</span><span>Cases</span></div>
+        <a class="btn" href="https://csgogem.com/r/xzarrx" target="_blank">REDEEM →</a>
+      </div>
+    </article>
 
-<section id="casinos" class="panel">
-  <div class="section-title">
-    <h2>🎰 Casino Bonuses</h2>
-    <p>Social casino links, daily rewards, free coins, free gems, and bonus opportunities.</p>
-  </div>
-
-  <div class="simple-grid">
-    <div class="simple-card">
-      <h3>Daily Casino Rewards</h3>
-      <p>Great for social casinos that offer daily coin claims, sweeps rewards, and free play promos.</p>
-    </div>
-
-    <div class="simple-card">
-      <h3>Free Gems & Cases</h3>
-      <p>Useful for CS2-style sites, case rewards, upgrade games, and gaming bonus platforms.</p>
-    </div>
-
-    <div class="simple-card">
-      <h3>Bonus Links</h3>
-      <p>Add any casino, gaming, or rewards link here when you get more affiliate offers.</p>
-    </div>
+    <article class="card orange">
+      <a class="card-image" href="YOUR_CSGOROLL_LINK_HERE" target="_blank">
+        <img class="logo-bg" src="https://www.google.com/s2/favicons?domain=csgoroll.com&sz=256" alt="CSGORoll">
+      </a>
+      <div class="card-content">
+        <h3>CSGORoll</h3>
+        <p>CSGORoll referrals can receive 3 free cases and a 5% top-up bonus when signing up through a referral link or code.</p>
+        <div class="tags"><span>3 Free Cases</span><span>CS2 Skins</span><span>Bonus</span></div>
+        <a class="btn" href="YOUR_CSGOROLL_LINK_HERE" target="_blank">GET CASES →</a>
+      </div>
+    </article>
   </div>
 </section>
 
-<section id="gaming" class="panel">
-  <div class="section-title">
-    <h2>🎮 Gaming Rewards</h2>
-    <p>Game deals, free rewards, gift cards, skins, cases, memberships, and gaming discounts.</p>
+<section class="section">
+  <div class="section-top">
+    <div>
+      <h2>💰 Cashback Apps</h2>
+      <p>Apps that help people save on things they already buy.</p>
+    </div>
+    <div class="scroll-buttons">
+      <button class="arrow" onclick="scrollDeals('cashback', -1)">‹</button>
+      <button class="arrow" onclick="scrollDeals('cashback', 1)">›</button>
+    </div>
   </div>
 
-  <div class="simple-grid">
-    <div class="simple-card">
-      <h3>G2A</h3>
-      <p>Good option for game keys and gaming marketplace deals. Look for their affiliate program through Awin.</p>
-    </div>
+  <div class="carousel" id="cashback">
+    <article class="card blue">
+      <a class="card-image" href="https://upside.app.link/ISAIAH23539" target="_blank">
+        <img src="images/upside.jpg" alt="Upside">
+      </a>
+      <div class="card-content">
+        <h3>Upside</h3>
+        <p>Upside gives cashback on gas, groceries, and restaurants. New users can get extra cashback on eligible first purchases.</p>
+        <div class="tags"><span>Gas</span><span>Groceries</span><span>Restaurants</span></div>
+        <a class="btn" href="https://upside.app.link/ISAIAH23539" target="_blank">GET CASHBACK →</a>
+      </div>
+    </article>
 
-    <div class="simple-card">
-      <h3>Fanatical</h3>
-      <p>Good for PC game bundles, Steam keys, and discounted gaming offers.</p>
-    </div>
+    <article class="card pink">
+      <a class="card-image" href="YOUR_IBOTTA_LINK_HERE" target="_blank">
+        <img class="logo-bg" src="https://www.google.com/s2/favicons?domain=ibotta.com&sz=256" alt="Ibotta">
+      </a>
+      <div class="card-content">
+        <h3>Ibotta</h3>
+        <p>Cashback app for groceries, retail shopping, online offers, and everyday purchases.</p>
+        <div class="tags"><span>Groceries</span><span>Shopping</span><span>Cashback</span></div>
+        <a class="btn" href="YOUR_IBOTTA_LINK_HERE" target="_blank">ADD LINK →</a>
+      </div>
+    </article>
 
-    <div class="simple-card">
-      <h3>GameFly</h3>
-      <p>Good for gaming subscriptions, rentals, and console game offers.</p>
-    </div>
+    <article class="card orange">
+      <a class="card-image" href="YOUR_FETCH_LINK_HERE" target="_blank">
+        <img class="logo-bg" src="https://www.google.com/s2/favicons?domain=fetch.com&sz=256" alt="Fetch">
+      </a>
+      <div class="card-content">
+        <h3>Fetch</h3>
+        <p>Receipt rewards app where users scan receipts and earn points toward gift cards.</p>
+        <div class="tags"><span>Receipts</span><span>Gift Cards</span><span>Rewards</span></div>
+        <a class="btn" href="YOUR_FETCH_LINK_HERE" target="_blank">ADD LINK →</a>
+      </div>
+    </article>
   </div>
 </section>
 
-<section id="tech" class="panel">
-  <div class="section-title">
-    <h2>💻 Tech Deals</h2>
-    <p>Software, creator tools, AI apps, VPNs, security apps, and useful digital products.</p>
-  </div>
-
-  <div class="simple-grid">
-    <div class="simple-card">
-      <h3>Surfshark</h3>
-      <p>VPN and online privacy tools. Good tech affiliate category for digital product offers.</p>
+<section class="section">
+  <div class="section-top">
+    <div>
+      <h2>🎮 Gaming Rewards</h2>
+      <p>Game keys, cases, skins, rewards, and gaming discounts.</p>
     </div>
-
-    <div class="simple-card">
-      <h3>Adobe</h3>
-      <p>Creative software and digital tools for creators, students, editors, and businesses.</p>
-    </div>
-
-    <div class="simple-card">
-      <h3>Hostinger</h3>
-      <p>Website hosting, domains, and online tools. Great fit if your audience builds websites.</p>
+    <div class="scroll-buttons">
+      <button class="arrow" onclick="scrollDeals('gaming', -1)">‹</button>
+      <button class="arrow" onclick="scrollDeals('gaming', 1)">›</button>
     </div>
   </div>
-</section>
 
-<section id="free" class="panel">
-  <div class="section-title">
-    <h2>🎁 Free Rewards</h2>
-    <p>Free apps, reward programs, signup bonuses, referral links, and useful freebies.</p>
-  </div>
+  <div class="carousel" id="gaming">
+    <article class="card purple">
+      <a class="card-image" href="YOUR_G2A_LINK_HERE" target="_blank">
+        <img class="logo-bg" src="https://www.google.com/s2/favicons?domain=g2a.com&sz=256" alt="G2A">
+      </a>
+      <div class="card-content">
+        <h3>G2A</h3>
+        <p>Marketplace for PC games, Steam keys, prepaid cards, console cards, skins, and gaming discounts.</p>
+        <div class="tags"><span>Game Keys</span><span>Discounts</span><span>Awin</span></div>
+        <a class="btn" href="YOUR_G2A_LINK_HERE" target="_blank">SHOP DEALS →</a>
+      </div>
+    </article>
 
-  <div class="simple-grid">
-    <div class="simple-card">
-      <h3>Receipt Apps</h3>
-      <p>Add Fetch, Ibotta, Receipt Hog, or other receipt reward apps here.</p>
-    </div>
+    <article class="card orange">
+      <a class="card-image" href="YOUR_FANATICAL_LINK_HERE" target="_blank">
+        <img class="logo-bg" src="https://www.google.com/s2/favicons?domain=fanatical.com&sz=256" alt="Fanatical">
+      </a>
+      <div class="card-content">
+        <h3>Fanatical</h3>
+        <p>PC game bundles, Steam keys, software bundles, and gaming discounts.</p>
+        <div class="tags"><span>Bundles</span><span>Steam Keys</span><span>Deals</span></div>
+        <a class="btn" href="YOUR_FANATICAL_LINK_HERE" target="_blank">ADD LINK →</a>
+      </div>
+    </article>
 
-    <div class="simple-card">
-      <h3>Free Signup Offers</h3>
-      <p>Add apps that reward people for signing up, trying services, or completing simple tasks.</p>
-    </div>
-
-    <div class="simple-card">
-      <h3>Daily Deals</h3>
-      <p>Use this area for rotating offers, Rakuten links, limited-time rewards, and seasonal deals.</p>
-    </div>
+    <article class="card blue">
+      <a class="card-image" href="YOUR_GAMEFLY_LINK_HERE" target="_blank">
+        <img class="logo-bg" src="https://www.google.com/s2/favicons?domain=gamefly.com&sz=256" alt="GameFly">
+      </a>
+      <div class="card-content">
+        <h3>GameFly</h3>
+        <p>Gaming rentals, subscriptions, and console game offers for players who want more options.</p>
+        <div class="tags"><span>Games</span><span>Console</span><span>Subscription</span></div>
+        <a class="btn" href="YOUR_GAMEFLY_LINK_HERE" target="_blank">ADD LINK →</a>
+      </div>
+    </article>
   </div>
 </section>
 
 </main>
 
 <footer class="footer">
-  <strong><span>Reward</span>Radar</strong>
+  <strong><span>SC</span>Rewards</strong>
   <small>DEALS. BONUSES. FREE REWARDS.</small>
 </footer>
+
+<script>
+function scrollDeals(id, direction) {
+  const carousel = document.getElementById(id);
+  const distance = Math.min(430, carousel.clientWidth * 0.85);
+  carousel.scrollBy({
+    left: direction * distance,
+    behavior: "smooth"
+  });
+}
+</script>
 
 </body>
 </html>
